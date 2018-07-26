@@ -24,10 +24,9 @@ public class TestPredicateExample{
         persons.add(new Person(35, "M", "Andrius", "Janulis", "andriusj@test.com", "Klaipeda"));
         persons.add(new Person(25, "W", "Greta", "B", "gretab@test.com", "Klaipeda"));
         persons.add(new Person(30, "W", "Agne", "B", "agneB@test.com", "Sauliai"));
-        persons.add(new Person(1, "W", "Dominyka", "B", "dominykab@test.com", "Vilnius"));
+        persons.add(new Person(1, "W", "Dominyka", "B", null, "Vilnius"));
         persons.add(new Person(55, "M", "Antanas", "B", "antanasB@test.com", "Kaunas"));
     }
-
 
     @Test
     public void testIsMale(){
@@ -35,4 +34,33 @@ public class TestPredicateExample{
         assertTrue(response.size() == 5);
     }
 
+    @Test
+    public void testIsAdultWomment(){
+        List<Person> response = PredicateExample.filterPerson(persons, PredicateExample.isAdultWomen());
+        assertTrue(response.size() == 2);
+    }
+
+    @Test
+    public void testisOlderThen(){
+        List<Person> response = PredicateExample.filterPerson(persons, PredicateExample.isOlderThen(30));
+        assertTrue(response.size() == 2);
+    }
+
+    @Test
+    public void testIsNameAndSurnameWhichFirstLetter(){
+        List<Person> response = PredicateExample.filterPerson(persons, PredicateExample.idNameAndSurnameWhichFirstLetter("A"));
+        assertTrue(response.size() == 1);
+    }
+
+    @Test
+    public void testIsFromCity(){
+        List<Person> response = PredicateExample.filterPerson(persons, PredicateExample.isFromCity("Kaunas"));
+        assertTrue(response.size() == 3);
+    }
+
+    @Test
+    public void testisWomenWithoutEmail(){
+        List<Person> response = PredicateExample.filterPerson(persons, PredicateExample.isWomenWithoutEmail());
+        assertTrue(response.size() == 1);
+    }
 }
